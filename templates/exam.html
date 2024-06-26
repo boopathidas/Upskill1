@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head>
+<body>
+    <div class="container question-container">
+        <h1>Exam</h1>
+        <div id="timer-container">
+            <span class="timer" id="timer">Time Left: 30 seconds</span>
+        </div>
+        <form id="examForm" action="/result" method="POST">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="course_id" value="{{ course_id }}">
+
+            {% set question_index = 0 %}
+            {% for question_id, question_data in questions_with_options.items() %}
+                <div class="question {% if loop.index == 1 %}active{% endif %}" id="question{{ loop.index }}">
+                    <h3>Question {{ loop.index }}: {{ question_data['question_text'] }}</h3>
+                    {% for option_data in question_data['options'] %}
+                        <input type="radio" name="{{ question_id }}" value="{{ option_data['option_text'] }}">
+                        <label>{{ option_data['option_text'] }}</label><br>
+                    {% endfor %}
+                </div>
+                {% set question_index = question_index + 1 %}
+            {% endfor %}
+            <!--<button type="button" onclick="navigateQuestions(-1)">Previous</button>-->
+            <button type="button" onclick="navigateQuestions(1)">Next</button>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        var currentQuestionIndex = 0;
+        var questions = document.querySelectorAll('.question');
+        var timerElement = document.getElementById('timer');
+        var secondsLeft = 30;
+        var timerInterval;
+    
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+    
+        function updateTimer() {
+            secondsLeft--;
+            timerElement.textContent = "Time Left: " + secondsLeft + " seconds";
+            if (secondsLeft <= 10) {
+                timerElement.classList.add('red'); // Add red color when 10 seconds or less remaining
+            }
+            if (secondsLeft <= 0) {
+                clearInterval(timerInterval);
+                navigateQuestions(1);
+            }
+        }
+    
+        function resetTimer() {
+            clearInterval(timerInterval);
+            secondsLeft = 30;
+            timerElement.textContent = "Time Left: " + secondsLeft + " seconds";
+            timerElement.classList.remove('red'); // Remove red color
+        }
+    
+        function navigateQuestions(direction) {
+            resetTimer();
+            var nextQuestionIndex = currentQuestionIndex + direction;
+            if (nextQuestionIndex >= 0 && nextQuestionIndex < questions.length) {
+                questions[currentQuestionIndex].classList.remove('active');
+                questions[nextQuestionIndex].classList.add('active');
+                currentQuestionIndex = nextQuestionIndex;
+                updateButtonVisibility();
+                startTimer();
+            }
+        }
+    
+        function updateButtonVisibility() {
+            if (currentQuestionIndex === 0) {
+                // document.querySelector('button[type="button"][onclick="navigateQuestions(-1)"]').style.display = 'none';
+            } else {
+                // document.querySelector('button[type="button"][onclick="navigateQuestions(-1)"]').style.display = 'inline-block';
+            }
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById('submitButton').style.display = 'inline-block';
+            } else {
+                document.getElementById('submitButton').style.display = 'none';
+            }
+        }
+    
+        updateButtonVisibility();
+        startTimer();
+    </script>
+</body>
+</html>

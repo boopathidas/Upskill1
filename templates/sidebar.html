@@ -1,0 +1,52 @@
+<!-- templates/sidebar.html -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+.sidebar {
+    position: fixed;
+    top: 75px; /* Adjust to leave space for the navbar */
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    background-color: #343a40;
+    color: #fff;
+    display: block;
+    padding: 0;
+    border-right: 2px solid #000; /* Black border */
+    overflow-y: auto; /* Add scrolling if content exceeds sidebar height */
+}
+
+.sidebar a {
+    background-color: #343a40;
+    color: #fff;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    border-bottom: 1px solid #495057;
+}
+
+.sidebar a:hover {
+    background-color: #495057; /* Hover effect */
+}
+
+.sidebar a.active {
+    background-color: #04AA6D;
+    color: white; /* Active link background */
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}</style>
+<div class="sidebar">
+    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="/enquiry"><i class="fas fa-question-circle"></i> Enquiry Form</a>
+    <a href="/student_registration"><i class="fas fa-user-plus"></i> Student Registration</a>
+    <a href="/all_courses"><i class="fas fa-book"></i> All Courses</a>
+    <a href="/exam"><i class="fas fa-pencil-alt"></i> Exam</a>
+    <a href="/student_records"><i class="fas fa-file-alt"></i> Student Records</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

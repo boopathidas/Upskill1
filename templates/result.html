@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Result</title>
+</head>
+<body>
+    <h1>Exam Result</h1>
+    <p>Your overall score: {{ overall_score }}</p>
+    <p>Number of correct answers: {{ correct_answers }}</p>
+    <p>Number of incorrect answers: {{ incorrect_answers }}</p>
+</body>
+</html>

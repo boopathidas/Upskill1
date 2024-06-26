@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Questions</title>
+</head>
+<body>
+    <h1>Admin - Manage Questions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Question Text</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+                <tr>
+                    <td>{{ question.question_id }}</td>
+                    <td>{{ question.question_text }}</td>
+                    <td>
+                        <form action="/admin/questions/delete/{{ question.question_id }}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="/admin/questions/add">Add New Question</a></p> <!-- Link to add a new question -->
+</body>
+</html>

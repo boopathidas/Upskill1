@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Computers Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        form ol {
+            padding: 0;
+            list-style: none;
+        }
+        form ol li {
+            margin-bottom: 20px;
+        }
+        form ol li p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        form ol li input {
+            margin-top: 5px;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Basic Computers Assessment</h1>
+        <form id="practice-test">
+            <ol>
+                <li>
+                    <p>What is a Computer?</p>
+                    <input type="radio" name="q1" value="A device for performing mathematical calculations"> A device for performing mathematical calculations<br>
+                    <input type="radio" name="q1" value="A machine that can store, retrieve, and process data"> A machine that can store, retrieve, and process data<br>
+                    <input type="radio" name="q1" value="A device used for cooking"> A device used for cooking<br>
+                    <input type="radio" name="q1" value="A type of furniture"> A type of furniture<br>
+                </li>
+                <li>
+                    <p>Which of the following is an example of an input device?</p>
+                    <input type="radio" name="q2" value="Monitor"> Monitor<br>
+                    <input type="radio" name="q2" value="Keyboard"> Keyboard<br>
+                    <input type="radio" name="q2" value="Printer"> Printer<br>
+                    <input type="radio" name="q2" value="Speaker"> Speaker<br>
+                </li>
+                <li>
+                    <p>What is the main function of the CPU?</p>
+                    <input type="radio" name="q3" value="To store data"> To store data<br>
+                    <input type="radio" name="q3" value="To perform calculations and execute instructions"> To perform calculations and execute instructions<br>
+                    <input type="radio" name="q3" value="To display output"> To display output<br>
+                    <input type="radio" name="q3" value="To manage power supply"> To manage power supply<br>
+                </li>
+                <li>
+                    <p>Which of the following is software?</p>
+                    <input type="radio" name="q4" value="Hard Disk"> Hard Disk<br>
+                    <input type="radio" name="q4" value="Mouse"> Mouse<br>
+                    <input type="radio" name="q4" value="Microsoft Word"> Microsoft Word<br>
+                    <input type="radio" name="q4" value="RAM"> RAM<br>
+                </li>
+                <li>
+                    <p>What does RAM stand for?</p>
+                    <input type="radio" name="q5" value="Random Access Memory"> Random Access Memory<br>
+                    <input type="radio" name="q5" value="Readily Available Memory"> Readily Available Memory<br>
+                    <input type="radio" name="q5" value="Read Access Memory"> Read Access Memory<br>
+                    <input type="radio" name="q5" value="Real-time Access Memory"> Real-time Access Memory<br>
+                </li>
+                <li>
+                    <p>What is an operating system?</p>
+                    <input type="radio" name="q6" value="A type of hardware"> A type of hardware<br>
+                    <input type="radio" name="q6" value="Software that manages computer hardware and software resources"> Software that manages computer hardware and software resources<br>
+                    <input type="radio" name="q6" value="A computer network"> A computer network<br>
+                    <input type="radio" name="q6" value="A type of programming language"> A type of programming language<br>
+                </li>
+                <li>
+                    <p>Which of the following is an example of an operating system?</p>
+                    <input type="radio" name="q7" value="Microsoft Windows"> Microsoft Windows<br>
+                    <input type="radio" name="q7" value="Microsoft Office"> Microsoft Office<br>
+                    <input type="radio" name="q7" value="Adobe Photoshop"> Adobe Photoshop<br>
+                    <input type="radio" name="q7" value="Google Chrome"> Google Chrome<br>
+                </li>
+                <li>
+                    <p>What does WWW stand for in web addresses?</p>
+                    <input type="radio" name="q8" value="World Wide Web"> World Wide Web<br>
+                    <input type="radio" name="q8" value="World Wide Wiki"> World Wide Wiki<br>
+                    <input type="radio" name="q8" value="Web World Wide"> Web World Wide<br>
+                    <input type="radio" name="q8" value="Web Wide World"> Web Wide World<br>
+                </li>
+                <li>
+                    <p>What is the primary purpose of a web browser?</p>
+                    <input type="radio" name="q9" value="To edit documents"> To edit documents<br>
+                    <input type="radio" name="q9" value="To browse the internet"> To browse the internet<br>
+                    <input type="radio" name="q9" value="To play music"> To play music<br>
+                    <input type="radio" name="q9" value="To write code"> To write code<br>
+                </li>
+                <li>
+                    <p>Which part of the computer is considered the 'brain' of the computer?</p>
+                    <input type="radio" name="q10" value="Hard Drive"> Hard Drive<br>
+                    <input type="radio" name="q10" value="Monitor"> Monitor<br>
+                    <input type="radio" name="q10" value="CPU"> CPU<br>
+                    <input type="radio" name="q10" value="Keyboard"> Keyboard<br>
+                </li>
+            </ol>
+            <button type="button" onclick="checkAnswers()">Submit</button>
+        </form>
+        <div id="results" style="margin-top: 20px;"></div>
+    </div>
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: "A machine that can store, retrieve, and process data",
+                q2: "Keyboard",
+                q3: "To perform calculations and execute instructions",
+                q4: "Microsoft Word",
+                q5: "Random Access Memory",
+                q6: "Software that manages computer hardware and software resources",
+                q7: "Microsoft Windows",
+                q8: "World Wide Web",
+                q9: "To browse the internet",
+                q10: "CPU"
+            };
+
+            let score = 0;
+            const form = document.forms["practice-test"];
+            for (const [key, value] of Object.entries(answers)) {
+                const userAnswer = form.elements[key].value;
+                if (userAnswer === value) {
+                    score++;
+                }
+            }
+
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = `<h3>Your Score: ${score} / 10</h3>`;
+        }
+    </script>
+</body>
+</html>

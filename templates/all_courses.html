@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }.header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        .header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .course-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .course-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .course-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body> 
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <h1>All Courses</h1>
+        <div class="course-list">
+            <div class="course-item">
+                <div class="course-title">Basic Computers</div>
+                <div class="course-description">Learn fundamental concepts of computer science and basic operations.</div>
+                <a href="static/BASICS%20COMPUTER%20COURSE.pdf" class="course-link">View Syllabus</a>
+                
+                <!-- Add space here -->
+                <span style="margin-right: 10px;"></span>
+                
+                <a href="static/Computer Fundamentals.pdf" class="course-link">View Notes</a>
+                <span style="margin-right: 10px;"></span>
+                <a href="#" class="course-link take-test-link" data-course-id="1">Take Test</a>
+                <span style="margin-right: 10px;"></span>
+                <a href="/assessment" class="course-link">Assessment</a>
+
+            </div>
+            
+        </div>     
+           
+            <div class="course-item">
+                <div class="course-title">Spoken English</div>
+                <div class="course-description">Master spoken English for effective communication.</div>
+                <a href="#" class="course-link">View Details</a>
+            </div>
+            <div class="course-item">
+                <div class="course-title">Advance Excel</div>
+                <div class="course-description">Excel beyond the basics with advanced functions and data analysis.</div>
+                <a href="#" class="course-link">View Details</a>
+            </div>
+            <div class="course-item">
+                <div class="course-title">Tally</div>
+                <div class="course-description">Master Tally ERP software for accounting and financial management.</div>
+                <a href="#" class="course-link">View Details</a>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        // Add event listener to all elements with class 'take-test-link'
+        document.querySelectorAll('.take-test-link').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                
+                // Extract the course ID from the href attribute
+                var courseId = this.getAttribute('data-course-id');
+                
+                // Make an AJAX request to fetch exam questions from the server
+                fetch('/api/get_exam_questions_with_options?course_id=' + courseId) 
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process the received exam questions data
+                        console.log(data);
+                        // For demonstration, you can display the questions in an alert
+                        alert(JSON.stringify(data));
+                    })
+                    .catch(error => {
+                        console.error('Error fetching exam questions:', error);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        .header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            width: calc(100% - 200px);
+        }
+        .container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #343a40;
+            margin-top: 20px;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            color: white;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .tab button.active {
+            background-color: #ccc;
+            color: black;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            margin-top: 10px;
+        }
+        .required::after {
+            content: "*";
+            color: red;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="tel"],
+        form input[type="email"],
+        form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form input[type="submit"],
+        form input[type="reset"] {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #343a40;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        form input[type="reset"] {
+            background: #888;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <div class="main-content">
+    <div class="container">
+        <h1>Student Registration Form</h1>
+
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'personal')">Personal Information</button>
+            <button class="tablinks" onclick="openTab(event, 'course')">Course Details</button>
+        </div>
+
+        <div id="personal" class="tabcontent">
+            <form action="/student_registration" method="post" id="personalForm">
+                <label for="registration_no" class="required">Registration No:</label>
+                <input type="text" id="registration_no" name="registration_no" value="{{ registration_number }}" readonly>
+
+                <label for="date_of_registration" class="required">Date of Registration:</label>
+                <input type="date" id="date_of_registration" name="date_of_registration" max="{{ current_date }}" required>
+
+                <label for="name" class="required">Name:</label>
+                <select id="name" name="name" class="select2" onchange="fetchEnquiryDetails()" required>
+                    <option value="">Select</option>
+                    {% for name in enquiry_names %}
+                        <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="mobile_no" class="required">Mobile No:</label>
+                <input type="tel" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" required>
+
+                <label for="email" class="required">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="date_of_birth" class="required">Date of Birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" max="{{ current_date }}" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Select">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="address" class="required">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="qualification" class="required">Qualification:</label>
+                <select id="qualification" name="qualification" required>
+                    <option value="Select">Select</option>
+                    <option value="High School">High School</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="Under Graduate">Under Graduate</option>
+                </select>
+
+                <input type="next" value="Next">
+            </form>
+        </div>
+
+        <div id="course" class="tabcontent">
+            <form action="/student_registration" method="post" id="courseForm">
+                <label for="course_name" class="required">Course Name:</label>
+                <input type="text" id="course_name" name="course_name" required>
+
+                <label for="duration" class="required">Duration:</label>
+                <input type="text" id="duration" name="duration" required>
+
+                <label for="fees" class="required">Fees:</label>
+                <input type="text" id="fees" name="fees" required>
+
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset" onclick="resetCourseForm()">
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        function resetPersonalForm() {
+            document.getElementById("personalForm").reset();
+        }
+
+        function resetCourseForm() {
+            document.getElementById("courseForm").reset();
+        }
+
+        function fetchEnquiryDetails() {
+            var name = $("#name").val();
+            $.ajax({
+                type: "POST",
+                url: "/fetch_enquiry_details",
+                data: { name: name },
+                success: function (enquiryDetails) {
+                    $("#email").val(enquiryDetails.email || "");
+                    $("#mobile_no").val(enquiryDetails.mobile || "");
+                    $("#gender").val(enquiryDetails.gender || "");
+                    $("#qualification").val(enquiryDetails.qualification || "");
+                    $("#address").val(enquiryDetails.address || "");
+                },
+                error: function () {
+                    console.error("Error fetching enquiry details.");
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('.select2').select2();
+            $('.select2-search__field').attr('placeholder', 'Search or type name...');
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

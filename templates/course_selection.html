@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Course Selection</title>
+</head>
+<body>
+    <style>.container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }</style>
+    <div class="container">
+    <h1>Select a Course</h1>
+    <form action="/select_course" method="post">
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        <label for="course">Select Course:</label>
+        <br><br>
+        <select name="course_id" id="course">
+            {% for course_id, course_name in courses %}
+            <option value="{{ course_id }}">{{ course_name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Select</button>
+    </form>
+</div>
+</body>
+</html>

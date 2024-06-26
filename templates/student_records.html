@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+    <style>
+        /* Box shape for enquiry count */
+        .enquiry-count {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: fit-content;
+        }
+
+        /* Table styling for registration records */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Records</h1>
+
+    <!-- Display enquiry count in a box shape -->
+    <div class="enquiry-count">
+        <h2>Enquiry Count: {{ enquiry_count }}</h2>
+    </div>
+
+    <!-- Display registration count in a box shape -->
+    <div class="enquiry-count">
+        <h2>Registration Count: {{ registration_count }}</h2>
+    </div>
+
+    <h2>Registration Records:</h2>
+    <!-- Use a table to display registration records in a tabular format -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Registration No</th>
+                <th>Registration Date</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Mobile No</th>
+                <th>Email</th>
+                <th>Qualification</th>
+                <th>College/University</th>
+                <th>Year of Passing</th>
+                <th>Total Fees</th>
+                <th>Due Amount</th>
+                <th>Mode of Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for record in registration_records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
+                <td>{{ record[6] }}</td>
+                <td>{{ record[7] }}</td>
+                <td>{{ record[8] }}</td>
+                <td>{{ record[9] }}</td>
+                <td>{{ record[10] }}</td>
+                <td>{{ record[11] }}</td>
+                <td>{{ record[12] }}</td>
+                <td>{{ record[13] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+</body>
+</html>
